@@ -1,5 +1,6 @@
 import tweepy
 import logging
+import os
 from os import environ
 
 logger = logging.getLogger()
