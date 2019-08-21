@@ -20,7 +20,7 @@ class FavRetweetListener(StreamListener):
         try:
             tweet.favorite()
             tweet.retweet()
-            time.sleep(15)
+            time.sleep(300)
         except Exception as e:
             logger.error("Error on fav and retweet", exc_info=True)
 
