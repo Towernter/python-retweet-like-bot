@@ -2,6 +2,7 @@ from tweepy import StreamListener
 from tweepy import Stream
 import logging
 from config import create_api
+import time
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -18,8 +19,8 @@ class FavRetweetListener(StreamListener):
             tweet.user.id == self.me.id:
             return
         try:
-            tweet.retweet()
-            #tweet.favorite()
+            tweet.favorite()
+            tweet.retweet()         
             time.sleep(200)
         except Exception as e:
             logger.error("Error on fav and retweet", exc_info=True)
