@@ -19,11 +19,12 @@ class FavRetweetListener(StreamListener):
             tweet.user.id == self.me.id:
             return
         try:
+            tweet.retweet()
             tweet.favorite()
-            tweet.retweet()         
             time.sleep(200)
         except Exception as e:
             logger.error("Error on fav and retweet", exc_info=True)
+        
 
     def on_error(self, status):
         logger.error(status)
