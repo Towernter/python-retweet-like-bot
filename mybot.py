@@ -38,4 +38,4 @@ def main(keywords):
 
 
 if __name__ == "__main__":
-    main(["#Arsenal", "#COYG"])
+    main(["#Arsenal"])
