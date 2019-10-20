@@ -7,6 +7,8 @@ import time
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+blocked_people = ["lawrhuns", "fan_banter", "_whatthesport", "bitcoinconnect", "premtrackerapp", "zakariaacehgrup", "e_arsenalnet"]
+blocked_words = ["@BudweiserNG", "gay", "lgbt", "fuck", "cunt", "pussy","lesben","dick","LGBT"]
 
 
 class FavRetweetListener(StreamListener):
@@ -17,7 +19,8 @@ class FavRetweetListener(StreamListener):
     def on_status(self, tweet):
         logger.info(f"Processing tweet id {tweet.id}")
         if tweet.in_reply_to_status_id is not None or \
-            tweet.user.id == self.me.id or (datetime.datetime.now() - tweet.created_at).days > 0.01666666666:
+            tweet.user.id == self.me.id or (datetime.datetime.now() - tweet.created_at).days > 0.01666666666 or \
+            tweet.user.screen_name in blocked_people or [word for word in blocked_words if word in tweet.text]:
             return
         try:
             tweet.retweet()
