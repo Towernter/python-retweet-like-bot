@@ -8,7 +8,7 @@ import time
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 blocked_people = ["lawrhuns", "fan_banter", "_whatthesport", "bitcoinconnect", "premtrackerapp", "zakariaacehgrup", "e_arsenalnet", "footy90com"]
-blocked_words = ["@BudweiserNG", "gay", "lgbt", "fuck", "cunt", "pussy","lesben","dick","LGBT", "RT @e_arsenalnet", "_whatthesport", "bitcoinconnect", "premtrackerapp", "zakariaacehgrup"]
+blocked_words = ["@BudweiserNG", "gay", "lgbt", "fuck", "cunt", "pussy","lesben","dick","LGBT", "RT @e_arsenalnet"]
 
 
 class FavRetweetListener(StreamListener):
