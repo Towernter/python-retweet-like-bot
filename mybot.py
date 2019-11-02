@@ -11,11 +11,13 @@ logger = logging.getLogger()
 blocked_people = ["lawrhuns", "fan_banter",
                     "_whatthesport", "bitcoinconnect",
                     "premtrackerapp", "zakariaacehgrup",
-                    "e_arsenalnet", "footy90com"
+                    "e_arsenalnet", "footy90com","FootyKeyrings",
+                    "HITCsportlive","Footballprojec8","ReadFootballCo",
+                    "ReadArsenal",
                     ]
 blocked_words = ["@BudweiserNG", "gay", "lgbt",
                  "fuck", "cunt", "pussy","lesben",
-                 "dick", "RT @", "lesbian",
+                 "dick", "lesbian",
                  "LGBT","RT @e_arsenalnet",
                  ]
 
