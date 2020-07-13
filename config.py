@@ -5,7 +5,7 @@ from os import environ
 
 logger = logging.getLogger()
 
-
+#checks and verifies if your twitter API keys are legit
 def create_api():
     consumer_key = environ['consumer_key']
     consumer_secret = environ['consumer_secret']
