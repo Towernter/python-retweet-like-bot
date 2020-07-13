@@ -1,4 +1,4 @@
-_**"# Retweet and Like Bot"**_ 
+#  Retweet and Like Bot
 
 This Application retweets and likes tweets based on your favourite harshtags
 
