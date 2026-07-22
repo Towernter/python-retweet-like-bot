@@ -1,26 +1,40 @@
-import tweepy
+"""Twitter API client setup.
+
+Reads credentials from environment variables (loaded from a local .env file
+when running locally, or from GitHub Actions secrets when deployed).
+"""
+
 import logging
 import os
-from os import environ
 
-logger = logging.getLogger()
+import tweepy
+from dotenv import load_dotenv
 
-#checks and verifies if your twitter API keys are legit
-def create_api():
-    consumer_key = environ['consumer_key']
-    consumer_secret = environ['consumer_secret']
-    access_token = environ['access_token']
-    access_token_secret = environ['access_token_secret']
+load_dotenv()
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+logger = logging.getLogger(__name__)
+
+
+def create_client():
+    """Create and verify a Twitter API v2 client.
+
+    Retweeting and liking are user actions, so we authenticate with OAuth 1.0a
+    user context (consumer keys + access tokens) rather than app-only auth.
+    """
+    client = tweepy.Client(
+        consumer_key=os.environ["CONSUMER_KEY"],
+        consumer_secret=os.environ["CONSUMER_SECRET"],
+        access_token=os.environ["ACCESS_TOKEN"],
+        access_token_secret=os.environ["ACCESS_TOKEN_SECRET"],
+        wait_on_rate_limit=True,
+    )
+
+    # Fail fast if the credentials are wrong.
     try:
-        api.verify_credentials()
-    except Exception as e:
-        logger.error("Error creating API", exc_info=True)
-        raise e
-    logger.info("API created")
-    return api
+        me = client.get_me()
+    except Exception:
+        logger.error("Error creating client — check your credentials", exc_info=True)
+        raise
 
-
+    logger.info("Client created for @%s", me.data.username)
+    return client

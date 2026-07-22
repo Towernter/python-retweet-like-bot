@@ -1,0 +1,37 @@
+name: Retweet and Like Bot
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'   # runs every 2 hours
+  workflow_dispatch:          # also lets you trigger it manually from GitHub
+
+# Prevent overlapping runs so the bot never doubles up on actions.
+concurrency:
+  group: retweet-bot
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the bot
+        env:
+          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          SEARCH_QUERY: ${{ vars.SEARCH_QUERY }}
+        run: python mybot.py

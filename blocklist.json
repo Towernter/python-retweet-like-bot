@@ -1,0 +1,10 @@
+{
+  "blocked_users": [
+    "user1",
+    "user2"
+  ],
+  "blocked_words": [
+    "word1",
+    "word2"
+  ]
+}
